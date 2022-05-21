@@ -1,0 +1,481 @@
+<h1 style="text-align: center; padding-top: 15px">
+  <strong>Alumni Feedback Form</strong>
+</h1>
+<div id="rootWrapper">
+  <div
+    id="root"
+    class="container"
+    style="padding-left: 20%; padding-top: 20px; padding-bottom: 20px"
+  >
+    <form [formGroup]="alumniFeedback" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name" class="col-sm-3 control-label">
+          <b>Name of the Student:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            formControlName="stuName"
+            id="name"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-10 control-label"
+          ><b>Name of the Organization you are associated now:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            id="name"
+            formControlName="orgName"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span><b>Type of Organization</b></span
+        ><br /><br />
+        <!-- <select [(ngModel)]="selectedOption">
+          <option [ngValue]="null">Select</option>
+          <option *ngFor="let  option of option1" [ngValue]="option">{{option.value}}</option>
+        </select> -->
+        <div class="checkbox" *ngFor="let org of organization">
+          <label
+            ><input
+              type="checkbox"
+              (change)="onCbChange($event)"
+              [value]="org.value"
+            />{{ org.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="email" class="col-sm-3 control-label"><b>Email:</b></label>
+        <div class="col-sm-6">
+          <input type="email" formControlName="email" class="form-control" />
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="number" class="col-sm-3 control-label">
+          <b>Mobile:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            id="number"
+            formControlName="mobile"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-5 control-label">
+          <b>Your NITPY enrolment No:</b></label
+        >
+        <div class="col-sm-6">
+          <input type="text" formControlName="regNum" class="form-control" />
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span><b>Highest Qualification:</b></span
+        ><br /><br />
+        <!-- <select [(ngModel)]="selectedOption">
+            <option [ngValue]="null">Select</option>
+            <option *ngFor="let  option of option2" [ngValue]="option">{{option.value}}</option>
+         </select> -->
+        <div class="checkbox" *ngFor="let q of qualifications">
+          <label
+            ><input
+              type="checkbox"
+              (change)="onCbChange($event)"
+              value="{{ q.value }}"
+            />{{ q.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >1.The current syllabus is adequately updated from the one followed
+            during your course study:</b
+          ></span
+        ><br /><br />
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              formControlName="q1"
+              value="{{ op3.value }}"
+              type="radio"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >2.The curriculum has the ability to find solutions to real
+            life/practical problems in industry through the use of technical
+            knowledge :</b
+          ></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q2"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >3.The curriculum has reasonably practical and laboratory skills for
+            analysis and design:</b
+          ></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q3"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >4.The curriculum inculcates required professional ethical values to
+            work independently and as team:</b
+          ></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q4"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >5.The curriculum encourages written and oral communication
+            abilities:</b
+          ></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q5"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >6.The curriculum bridges conventional and modern aspects of topics
+            of study:</b
+          ></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q6"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >7.The curriculum has ability to engage in a process of continuous
+            learning to meet the current job requirements:</b
+          ></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q7"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >8.The curriculum equips to feel confident for higher study in India
+            and abroad:</b
+          ></span
+        ><br /><br />
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q8"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >9.The current curriculum is supporting for clearing the competitive
+            exams:</b
+          ></span
+        ><br /><br />
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q9"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >10.The content reflects the course objectives adequately:</b
+          ></span
+        ><br /><br />
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q10"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b>11.The content reflects the course outcomes adequately:</b></span
+        ><br /><br />
+        <div class="radio" *ngFor="let op3 of option3; let i = index">
+          <label
+            ><input
+              type="radio"
+              value="{{ op3.value }}"
+              formControlName="q11"
+            />{{ op3.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-10 control-label">
+          <b>12.Three points that you like most about the program:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            formControlName="q12"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-10 control-label">
+          <b>13.Three points that you like least about the program:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            formControlName="q13"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b
+            >14 a.Do you suggest any Elective courses in addition to the current
+            offer</b
+          ></span
+        ><br /><br />
+        <div class="radio" *ngFor="let op5 of option5">
+          <label
+            ><input
+              type="radio"
+              formControlName="q14"
+              value="{{ op5.value }}"
+            />{{ op5.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-10 control-label">
+          <b>14 b.If yes,mention please:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            formControlName="q14b"
+            id="name"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-10 control-label">
+          <b
+            >15 a.Do you feel that some courses require tutorial hours:</b
+          ></label
+        >
+        <br /><br />
+        <div class="radio" *ngFor="let op5 of option5">
+          <label
+            ><input
+              type="radio"
+              formControlName="q15"
+              value="{{ op5.value }}"
+            />{{ op5.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-10 control-label">
+          <b>15 b.If yes,mention please:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            formControlName="q15b"
+            id="name"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="col-sm-10">
+        <span
+          ><b>16.Your view to improve the quality emphasis needed on:</b></span
+        ><br /><br />
+
+        <div class="radio" *ngFor="let op4 of option4">
+          <label
+            ><input
+              type="radio"
+              value="{{ op4.value }}"
+              formControlName="q16"
+            />{{ op4.value }}</label
+          >
+        </div>
+      </div>
+      <br />
+      <!-- ################ -->
+      <span
+        ><b
+          >17.The current program overall satisfies in meeting educational
+          objectives:</b
+        ></span
+      ><br /><br />
+      <div class="col-sm-10">
+        <!-- <select [(ngModel)]="selectedOption">
+          <option [ngValue]="null">Select</option>
+          <option *ngFor="let  option of option5" [ngValue]="option">{{option.value}}</option>
+        </select> -->
+        <select formControlName="q17" (change)="onDropDownChange($event)">
+          <option value="" selected>*</option>
+          <option *ngFor="let op6 of option6" value="{{ op6.value }}">
+            {{ op6.value }}
+          </option>
+        </select>
+      </div>
+      <br /><br />
+
+      <div class="form-group">
+        <label for="name" class="col-sm-12 control-label">
+          <b>18.Additional comments(if any) on the syllabus:</b></label
+        >
+        <div class="col-sm-6">
+          <input
+            type="text"
+            id="name"
+            formControlName="q18"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="row" style="padding: 35px">
+        <!-- <a id="submit_button" class="float-left mb-3">Submit</a> -->
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+  </div>
+</div>
+<!-- [disabled]="alumniFeedback.invalid" -->
