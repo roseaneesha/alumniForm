@@ -1,11 +1,12 @@
 <?php
-
 header("Access-Control-Allow-Origin:*");
-header("Access-Control-Allow-Methods: PUT, GET, POST, OPTIONS ");
-header("Access-Control-Allow-Headers: Origin, X-Requested-Width, Content-
-Type, Accept");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: GET,PUT,GET,POST,OPTIONS");
+header('Access-Control-Max-Age: 1000');
+header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization");
+error_reporting(0);
 
-$connect = mysqli_connect('localhost', 'root', '', 'alumni') or die;
+$connect = mysqli_connect('localhost', 'root', '', 'nitpy_facstaff') or die;
 if ($connect) {
     echo 'Connected';
 } else {
