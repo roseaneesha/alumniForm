@@ -7,7 +7,7 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AluminFeedbackServiceService {
-  private baseUrl = 'http://localhost/projects/';
+  private baseUrl = 'http://localhost/projects/alumni/';
   // private baseUrl = '../../';
 
   constructor(private http: HttpClient) {}

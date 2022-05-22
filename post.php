@@ -1,9 +1,11 @@
 <?php
+
 header("Access-Control-Allow-Origin:*");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: GET,PUT, GET, POST, OPTIONS ");
 header('Access-Control-Max-Age: 1000');
-header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization, access-control-allow-credentials, access-control-allow-headers, access-control-allow-methods,access-control-allow-origin");
+header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization, access-control-allow-credentials, access-control-allow-headers, access-control-allow-methods");
+// error_reporting(0);
 
 
 $connect = mysqli_connect('localhost', 'root', '', 'alumni') or die;
@@ -15,6 +17,7 @@ if ($connect) {
 
 
 $alumniFeedback = file_get_contents("php://input");
+
 if (isset($alumniFeedback) && !empty($alumniFeedback)) {
     $req = json_decode($alumniFeedback);
 
@@ -56,7 +59,10 @@ if (isset($alumniFeedback) && !empty($alumniFeedback)) {
     if (!$check) {
         echo (mysqli_error($connect));
     } else {
+
         echo '\ndone';
+
+
     }
 } else {
     echo "\nerror occured";

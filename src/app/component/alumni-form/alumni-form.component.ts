@@ -10,7 +10,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { AluminFeedbackServiceService } from './../../alumin-feedback-service.service';
 
-import { FormDataa } from 'src/app/form-data';
+import { FormDataa } from 'src/app/FormDataa';
 @Component({
   selector: 'app-alumni-form',
   templateUrl: './alumni-form.component.html',
