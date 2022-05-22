@@ -23,6 +23,7 @@
       </div>
       <br />
 
+
       <div class="form-group">
         <label for="name" class="col-sm-10 control-label"
           ><b>Name of the Organization you are associated now:</b></label
@@ -38,24 +39,22 @@
       </div>
       <br />
 
+
       <div class="col-sm-10">
         <span><b>Type of Organization</b></span
         ><br /><br />
-        <!-- <select [(ngModel)]="selectedOption">
-          <option [ngValue]="null">Select</option>
-          <option *ngFor="let  option of option1" [ngValue]="option">{{option.value}}</option>
-        </select> -->
-        <div class="checkbox" *ngFor="let org of organization">
+        <div *ngFor="let org of organization; let i=index" formArrayName="organization">
           <label
             ><input
               type="checkbox"
-              (change)="onCbChange($event)"
-              [value]="org.value"
-            />{{ org.value }}</label
+              (change)="onCheckBoxChange($event)"
+              [value]="org"
+            />{{ org }}</label
           >
         </div>
       </div>
       <br />
+      
 
       <div class="form-group">
         <label for="email" class="col-sm-3 control-label"><b>Email:</b></label>
@@ -93,17 +92,13 @@
       <div class="col-sm-10">
         <span><b>Highest Qualification:</b></span
         ><br /><br />
-        <!-- <select [(ngModel)]="selectedOption">
-            <option [ngValue]="null">Select</option>
-            <option *ngFor="let  option of option2" [ngValue]="option">{{option.value}}</option>
-         </select> -->
-        <div class="checkbox" *ngFor="let q of qualifications">
+        <div class="radio" *ngFor="let q of qualifications">
           <label
             ><input
-              type="checkbox"
-              (change)="onCbChange($event)"
-              value="{{ q.value }}"
-            />{{ q.value }}</label
+              type="radio"
+              formControlName="qualifications"
+              [value]="q"
+            />{{ q }}</label
           >
         </div>
       </div>
@@ -120,9 +115,9 @@
           <label
             ><input
               formControlName="q1"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               type="radio"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -141,9 +136,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q2"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -161,9 +156,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q3"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -181,9 +176,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q4"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -201,9 +196,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q5"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -221,9 +216,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q6"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -241,9 +236,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q7"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -260,9 +255,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q8"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -279,9 +274,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q9"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -297,9 +292,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q10"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -313,9 +308,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op3.value }}"
+              value="{{ op3 }}"
               formControlName="q11"
-            />{{ op3.value }}</label
+            />{{ op3 }}</label
           >
         </div>
       </div>
@@ -363,8 +358,8 @@
             ><input
               type="radio"
               formControlName="q14"
-              value="{{ op5.value }}"
-            />{{ op5.value }}</label
+              value="{{ op5 }}"
+            />{{ op5 }}</label
           >
         </div>
       </div>
@@ -397,8 +392,8 @@
             ><input
               type="radio"
               formControlName="q15"
-              value="{{ op5.value }}"
-            />{{ op5.value }}</label
+              value="{{ op5 }}"
+            />{{ op5 }}</label
           >
         </div>
       </div>
@@ -428,9 +423,9 @@
           <label
             ><input
               type="radio"
-              value="{{ op4.value }}"
+              value="{{ op4 }}"
               formControlName="q16"
-            />{{ op4.value }}</label
+            />{{ op4 }}</label
           >
         </div>
       </div>
@@ -443,14 +438,10 @@
         ></span
       ><br /><br />
       <div class="col-sm-10">
-        <!-- <select [(ngModel)]="selectedOption">
-          <option [ngValue]="null">Select</option>
-          <option *ngFor="let  option of option5" [ngValue]="option">{{option.value}}</option>
-        </select> -->
-        <select formControlName="q17" (change)="onDropDownChange($event)">
+        <select formControlName="q17">
           <option value="" selected>*</option>
-          <option *ngFor="let op6 of option6" value="{{ op6.value }}">
-            {{ op6.value }}
+          <option *ngFor="let op6 of option6" value="{{ op6}}" formControlName="q17">
+            {{ op6}}
           </option>
         </select>
       </div>
