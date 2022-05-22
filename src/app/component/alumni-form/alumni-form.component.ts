@@ -18,108 +18,14 @@ import { FormDataa } from 'src/app/form-data';
 })
 export class AlumniFormComponent implements OnInit {
   alumniFeedback: FormGroup; //step 1
-  dataAlumni: FormDataa;
-  option3 = [
-    {
-      value: 'Strongly agree',
-    },
-    {
-      value: 'Agree',
-    },
-    {
-      value: 'Undecided',
-    },
-    {
-      value: 'Disagree',
-    },
-  ];
-  organization = [
-    { value: 'Corporate' },
-    { value: 'PSU' },
-    {
-      value: 'Startup',
-    },
-    {
-      value: 'Academic',
-    },
-    {
-      value: 'Research',
-    },
-    {
-      value: 'Other',
-    },
-  ];
-  qualifications = [
-    {
-      value: 'Graduate',
-    },
-    {
-      value: 'Masters',
-    },
-    {
-      value: 'Doctorate',
-    },
-  ];
+  organization = ['Corporate', 'PSU', 'Startup', 'Academic', 'Research', 'Other'];
+  qualifications = ['Graduate', 'Masters', 'Doctorate'];
+  option3 = ['Strongly agree', 'Agree', 'Undecided', 'Disagree'];
+  option4 = ['Fundamental knowledge', 'Practical Exposure', 'Communication skill', 'Programming skill', 'All of the above'];
+  option5 = ['Yes', 'No'];
+  option6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 
-  option4 = [
-    {
-      value: 'Fundamental knowledge',
-    },
-    {
-      value: 'Practical Exposure',
-    },
-    {
-      value: 'Communication skill',
-    },
-    {
-      value: 'Programming skill',
-    },
-    {
-      value: 'All of the above',
-    },
-  ];
-  option6 = [
-    {
-      value: '01',
-    },
-    {
-      value: '02',
-    },
-    {
-      value: '03',
-    },
-    {
-      value: '04',
-    },
-    {
-      value: '05',
-    },
-    {
-      value: '06',
-    },
-    {
-      value: '07',
-    },
-    {
-      value: '08',
-    },
-    {
-      value: '09',
-    },
-    {
-      value: '10',
-    },
-  ];
-
-  option5 = [{ value: 'Yes' }, { value: 'No' }];
-
-  constructor(
-    private fb: FormBuilder,
-    public postService: AluminFeedbackServiceService
-  ) {
-    // step 2- initilaxe fb service
-  }
-  //todo- qualifications and organization not working
+  constructor(public postService: AluminFeedbackServiceService) { }
 
   ngOnInit(): void {
     // step 3- add the data model for the formgroup
@@ -127,7 +33,7 @@ export class AlumniFormComponent implements OnInit {
       stuName: new FormControl('', Validators.required),
       orgName: new FormControl('', Validators.required),
       organization: new FormArray([]),
-      qualifications: new FormArray([]),
+      qualifications: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
       mobile: new FormControl('', [
         Validators.required,
@@ -156,46 +62,20 @@ export class AlumniFormComponent implements OnInit {
       q17: new FormControl(''),
       q18: new FormControl(''),
     });
-    // this.alumniFeedback.valueChanges.subscribe(console.log);
+
   }
 
-  // selectedOption = null;
 
-  onCbChange(e: any) {
-    console.log(this.org);
-
+  onCheckBoxChange(e: any) {
+    const organization = (this.alumniFeedback.controls.organization as FormArray);
     if (e.target.checked) {
-      if (!this.org.dirty) {
-        this.org.controls.push(new FormControl(e.target.value));
-      }
-      // if (!this.qualify.dirty) {
-      //   this.qualify.controls.push(new FormControl(e.target.value));
-      // }
+      organization.push(new FormControl(e.target.value))
     } else {
-      let i = 0;
-      this.org.controls.forEach((item) => {
-        if (item.value == e.target.value) {
-          this.org.removeAt(i);
-          return;
-        }
-        i++;
-      });
+      const index = organization.controls.findIndex(x => x.value == e.target.value);
+      organization.removeAt(index);
     }
   }
 
-  onDropDownChange(e: any) {
-    console.log(e.value);
-    this.q17.setValue(e.target.value, { onlySelf: true });
-  }
-  get org() {
-    return this.alumniFeedback.get('qualifications') as FormArray;
-  }
-  get qualify() {
-    return this.alumniFeedback.get(' organization') as FormArray;
-  }
-  get q17() {
-    return this.alumniFeedback.get('q17');
-  }
 
   onSubmit() {
     if (this.alumniFeedback.valid) {
@@ -203,9 +83,8 @@ export class AlumniFormComponent implements OnInit {
       this.postService
         .postAlumniFeedback(this.alumniFeedback.value)
         .subscribe((res) => {
-          console.log('send ig');
+          console.log(res);
         });
-
       this.alumniFeedback.reset();
     }
   }
