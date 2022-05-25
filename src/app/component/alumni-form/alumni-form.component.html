@@ -23,7 +23,6 @@
       </div>
       <br />
 
-
       <div class="form-group">
         <label for="name" class="col-sm-10 control-label"
           ><b>Name of the Organization you are associated now:</b></label
@@ -39,11 +38,13 @@
       </div>
       <br />
 
-
       <div class="col-sm-10">
         <span><b>Type of Organization</b></span
         ><br /><br />
-        <div *ngFor="let org of organization; let i=index" formArrayName="organization">
+        <div
+          *ngFor="let org of organization; let i = index"
+          formArrayName="organization"
+        >
           <label
             ><input
               type="checkbox"
@@ -54,7 +55,6 @@
         </div>
       </div>
       <br />
-      
 
       <div class="form-group">
         <label for="email" class="col-sm-3 control-label"><b>Email:</b></label>
@@ -113,11 +113,9 @@
         ><br /><br />
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              formControlName="q1"
-              value="{{ op3 }}"
-              type="radio"
-            />{{ op3 }}</label
+            ><input formControlName="q1" value="{{ op3 }}" type="radio" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -134,11 +132,9 @@
 
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q2"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q2" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -154,11 +150,9 @@
 
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q3"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q3" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -174,11 +168,9 @@
 
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q4"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q4" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -194,11 +186,9 @@
 
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q5"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q5" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -214,11 +204,9 @@
 
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q6"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q6" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -234,11 +222,9 @@
 
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q7"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q7" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -253,11 +239,9 @@
         ><br /><br />
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q8"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q8" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -272,11 +256,9 @@
         ><br /><br />
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q9"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q9" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -290,11 +272,9 @@
         ><br /><br />
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q10"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q10" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -306,11 +286,9 @@
         ><br /><br />
         <div class="radio" *ngFor="let op3 of option3; let i = index">
           <label
-            ><input
-              type="radio"
-              value="{{ op3 }}"
-              formControlName="q11"
-            />{{ op3 }}</label
+            ><input type="radio" value="{{ op3 }}" formControlName="q11" />{{
+              op3
+            }}</label
           >
         </div>
       </div>
@@ -356,6 +334,7 @@
         <div class="radio" *ngFor="let op5 of option5">
           <label
             ><input
+              (change)="onChangeYes($event)"
               type="radio"
               formControlName="q14"
               value="{{ op5 }}"
@@ -389,11 +368,9 @@
         <br /><br />
         <div class="radio" *ngFor="let op5 of option5">
           <label
-            ><input
-              type="radio"
-              formControlName="q15"
-              value="{{ op5 }}"
-            />{{ op5 }}</label
+            ><input type="radio" formControlName="q15" value="{{ op5 }}" />{{
+              op5
+            }}</label
           >
         </div>
       </div>
@@ -421,11 +398,9 @@
 
         <div class="radio" *ngFor="let op4 of option4">
           <label
-            ><input
-              type="radio"
-              value="{{ op4 }}"
-              formControlName="q16"
-            />{{ op4 }}</label
+            ><input type="radio" value="{{ op4 }}" formControlName="q16" />{{
+              op4
+            }}</label
           >
         </div>
       </div>
@@ -440,8 +415,8 @@
       <div class="col-sm-10">
         <select formControlName="q17">
           <option value="" selected>*</option>
-          <option *ngFor="let op6 of option6" value="{{ op6}}" formControlName="q17">
-            {{ op6}}
+          <option *ngFor="let op6 of option6" value="{{ op6 }}">
+            {{ op6 }}
           </option>
         </select>
       </div>

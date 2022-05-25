@@ -1,3 +1,4 @@
+import { FormDataa } from 'src/app/FormDataa';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -12,20 +13,10 @@ export class AluminFeedbackServiceService {
 
   constructor(private http: HttpClient) {}
 
-  postAlumniFeedback(data: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:4200',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      }),
-    };
-    return this.http.post(this.baseUrl + 'post.php', data, httpOptions).pipe(
+  postAlumniFeedback(data: any) {
+    // console.log(data);
+    return this.http.post(this.baseUrl + 'post.php', data).pipe(
       catchError((e: any) => {
-        console.log('hii');
-
         return e.message;
       })
     );

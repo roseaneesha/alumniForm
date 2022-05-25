@@ -3,32 +3,46 @@ import {
   Validators,
   FormArray,
   FormControl,
-  FormBuilder,
-  Form,
   FormGroup,
+  AbstractControl,
 } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AluminFeedbackServiceService } from './../../alumin-feedback-service.service';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
-import { FormDataa } from 'src/app/FormDataa';
 @Component({
   selector: 'app-alumni-form',
   templateUrl: './alumni-form.component.html',
   styleUrls: ['./alumni-form.component.css'],
 })
 export class AlumniFormComponent implements OnInit {
-  alumniFeedback: FormGroup; //step 1
-  organization = ['Corporate', 'PSU', 'Startup', 'Academic', 'Research', 'Other'];
+  alumniFeedback: FormGroup;
+  organization = [
+    'Corporate',
+    'PSU',
+    'Startup',
+    'Academic',
+    'Research',
+    'Other',
+  ];
   qualifications = ['Graduate', 'Masters', 'Doctorate'];
   option3 = ['Strongly agree', 'Agree', 'Undecided', 'Disagree'];
-  option4 = ['Fundamental knowledge', 'Practical Exposure', 'Communication skill', 'Programming skill', 'All of the above'];
+  option4 = [
+    'Fundamental knowledge',
+    'Practical Exposure',
+    'Communication skill',
+    'Programming skill',
+    'All of the above',
+  ];
   option5 = ['Yes', 'No'];
   option6 = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 
-  constructor(public postService: AluminFeedbackServiceService) { }
+  constructor(
+    public postService: AluminFeedbackServiceService,
+    private el: ElementRef
+  ) {}
 
   ngOnInit(): void {
-    // step 3- add the data model for the formgroup
     this.alumniFeedback = new FormGroup({
       stuName: new FormControl('', Validators.required),
       orgName: new FormControl('', Validators.required),
@@ -40,51 +54,68 @@ export class AlumniFormComponent implements OnInit {
         Validators.pattern('[0-9]*'),
         Validators.min(7),
       ]),
-      regNum: new FormControl(''),
-      q1: new FormControl(''),
-      q2: new FormControl(''),
-      q3: new FormControl(''),
-      q4: new FormControl(''),
-      q5: new FormControl(''),
-      q6: new FormControl(''),
-      q7: new FormControl(''),
-      q8: new FormControl(''),
-      q9: new FormControl(''),
-      q10: new FormControl(''),
-      q11: new FormControl(''),
-      q12: new FormControl(''),
-      q13: new FormControl(''),
-      q14: new FormControl(''),
+      regNum: new FormControl('', Validators.required),
+      q1: new FormControl('', Validators.required),
+      q2: new FormControl('', Validators.required),
+      q3: new FormControl('', Validators.required),
+      q4: new FormControl('', Validators.required),
+      q5: new FormControl('', Validators.required),
+      q6: new FormControl('', Validators.required),
+      q7: new FormControl('', Validators.required),
+      q8: new FormControl('', Validators.required),
+      q9: new FormControl('', Validators.required),
+      q10: new FormControl('', Validators.required),
+      q11: new FormControl('', Validators.required),
+      q12: new FormControl('', Validators.required),
+      q13: new FormControl('', Validators.required),
+      q14: new FormControl('', Validators.required),
       q14b: new FormControl(''),
-      q15: new FormControl(''),
+      q15: new FormControl('', Validators.required),
       q15b: new FormControl(''),
-      q16: new FormControl(''),
-      q17: new FormControl(''),
+      q16: new FormControl('', Validators.required),
+      q17: new FormControl('', Validators.required),
       q18: new FormControl(''),
     });
-
   }
 
+  onChangeYes(e) {
+    const aPart = this.alumniFeedback.get('q14').value;
+    const bPart = this.alumniFeedback.get('q14b');
+    if (aPart === 'Yes') {
+      bPart.setValidators([Validators.required]);
+      bPart.updateValueAndValidity();
+      return;
+    }
+  }
 
   onCheckBoxChange(e: any) {
-    const organization = (this.alumniFeedback.controls.organization as FormArray);
+    const organization = this.alumniFeedback.controls.organization as FormArray;
     if (e.target.checked) {
-      organization.push(new FormControl(e.target.value))
+      organization.push(new FormControl(e.target.value));
     } else {
-      const index = organization.controls.findIndex(x => x.value == e.target.value);
+      const index = organization.controls.findIndex(
+        (x) => x.value == e.target.value
+      );
       organization.removeAt(index);
     }
   }
 
-
   onSubmit() {
+    for (const key of Object.keys(this.alumniFeedback.controls)) {
+      if (this.alumniFeedback.controls[key].invalid) {
+        const wrongAnswer = this.el.nativeElement.querySelector(
+          '[formControlName="' + key + '"]'
+        );
+        console.log(key);
+
+        wrongAnswer.focus();
+        break;
+      }
+    }
     if (this.alumniFeedback.valid) {
-      console.log(this.alumniFeedback.value);
       this.postService
         .postAlumniFeedback(this.alumniFeedback.value)
-        .subscribe((res) => {
-          console.log(res);
-        });
+        .subscribe((res) => {});
       this.alumniFeedback.reset();
     }
   }
